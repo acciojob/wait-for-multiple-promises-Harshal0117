@@ -4,27 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promise Timing Table</title>
-    <link 
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" 
-        rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" 
-        crossorigin="anonymous"
-    />
 </head>
-<body class="container mt-4">
-
-    <h2 class="text-center">Promise Timing Table</h2>
-
-    <table class="table table-striped table-hover table-bordered mt-3">
-        <thead class="table-dark">
+<body>
+    <table border="1">
+        <thead>
             <tr>
                 <th>Promise</th>
                 <th>Time Taken (Seconds)</th>
             </tr>
         </thead>
         <tbody id="output">
-            <tr>
-                <td colspan="2" class="text-center">Loading...</td>
+            <tr id="loading">
+                <td colspan="2">Loading...</td>
             </tr>
         </tbody>
     </table>
@@ -39,9 +30,10 @@
 
         const promises = [createPromise(1), createPromise(2), createPromise(3)];
         const outputTable = document.getElementById("output");
+        const loadingRow = document.getElementById("loading");
 
         Promise.all(promises).then(results => {
-            outputTable.innerHTML = ""; // Remove loading message
+            loadingRow.remove(); // Remove loading row when promises resolve
             let maxTime = 0;
 
             results.forEach(result => {
@@ -50,16 +42,10 @@
                 outputTable.innerHTML += row;
             });
 
-            outputTable.innerHTML += `<tr class="table-info"><td>Total</td><td>${maxTime.toFixed(3)}</td></tr>`;
+            outputTable.innerHTML += `<tr><td>Total</td><td>${maxTime.toFixed(3)}</td></tr>`;
         });
     </script>
-
-    <script 
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" 
-        crossorigin="anonymous"
-    ></script>
-
 </body>
 </html>
+
 
